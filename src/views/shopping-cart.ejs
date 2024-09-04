@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link href="/public/assets/style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <header>
+      <nav class="navigation">
+        <div class="container-nav-list-menu">
+          <div class="wrapper-logo-foods">
+            <figure class="logo-foods">
+              <img src="/backend/src/public/images/Aiya_Food__2_-removebg-preview.png" alt="" />
+            </figure>
+            <h1>
+              Sna<span class="logo-title-c">c</span>k
+              <span class="logo-title-digger"><span class="logo-title-d">D</span>igger</span>
+            </h1>
+          </div>
+          <div class="wrapper-nav-list-menu">
+            <div class="nav-input-search-product">
+              <input class="nav-search-product" type="search" placeholder="Cari Product" />
+              <div class="nav-button-search">
+                <i data-feather="search" class="icon-nav-search"></i>
+              </div>
+            </div>
+            <div class="nav-icon-book-home">
+              <i data-feather="book-open" class="icon-book-open" onclick="HandleDropDown()"></i>
+            </div>
+
+            <div class="con-wrapp-icon-button">
+              <div class="wrapper-icon-button">
+                <div class="nav-icon-shopping">
+                  <a href="../frontend/ShoppingCard.html">
+                    <div class="nav-shopping-wrapper">
+                      <i data-feather="shopping-cart" class="nav-icon-shopping-card"></i>
+                    </div>
+                  </a>
+                  <a href="">
+                    <div class="nav-bell-wrapper">
+                      <i data-feather="bell" class="nav-icon-bell"></i>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <section class="section">
+      <div class="container-product-shopping-cart">
+        <div class="product-shopping-cart-column">
+          <div class="product-shopping-cart-list-1">
+            <div class="product-shopping-fill-1-1">
+              <input type="checkbox" />
+              <label>Pilih semua product</label>
+            </div>
+            <div class="product-shopping-fill-1-2">
+              <a>Harga satuan</a>
+              <a>Kuantitas</a>
+              <a>Total harga</a>
+            </div>
+          </div>
+          <div class="product-shopping-cart-list-2">
+            <div class="product-shopping-fill-2-1">
+              <input type="checkbox" />
+              <label>Pilih product</label>
+            </div>
+            <div class="product-shopping-fill-2-2">
+              <a>Harga satuan</a>
+              <a>Kuantitas</a>
+              <a>Total harga</a>
+            </div>
+          </div>
+          <div class="product-shopping-cart-list-3">
+            <div class="product-shopping-fill-3-1">
+              <input type="checkbox" />
+              <label>Pilih product</label>
+            </div>
+            <div class="product-shopping-fill-3-2">
+              <a>Harga satuan</a>
+              <a>Kuantitas</a>
+              <a>Total harga</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer>
+      <div class="container-footer-shooping">
+        <div class="column-footer-shopping">
+          <div class="footer-fill-down">
+            <div class="footer-wrapper-column-down">
+              <nav class="wrapper-logo-foods">
+                <figure class="logo-foods">
+                  <img src="/backend/src/public/images/Aiya_Food__2_-removebg-preview.png" alt="" />
+                </figure>
+                <h1>Snack Digger</h1>
+              </nav>
+              <nav class="wrapper-list-column-ul">
+                <ul>
+                  <a>My team</a>
+                </ul>
+                |
+                <ul>
+                  <a>My team</a>
+                </ul>
+                |
+                <ul>
+                  <a>My team</a>
+                </ul>
+                |
+                <ul>
+                  <a>My team</a>
+                </ul>
+              </nav>
+              <div class="footer-contactUs">
+                <button><a>Contact Us</a></button> |
+                <a>089762347858</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script>
+    feather.replace();
+  </script>
+</html>
