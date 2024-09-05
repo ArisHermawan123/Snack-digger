@@ -10,6 +10,7 @@ const router = require("./src/routers/routes");
 require("dotenv").config();
 require("./src/routers/index.routes")(app);
 require("./src/routers/home.routes")(app);
+require("./src/routers/product.routes")(app);
 
 app.set("views", "./src/views");
 app.set("view engine", "ejs");

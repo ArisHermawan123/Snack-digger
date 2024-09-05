@@ -1,7 +1,7 @@
 const router = require("express").Router();
 
 module.exports = (app) => {
-  router.get("/", (req, res) => {
+  router.get("/product", (req, res) => {
     async function getCoins() {
       const api_url = "http://localhost:3200/upload/data";
       const fetch_response = await fetch(api_url);
@@ -9,10 +9,7 @@ module.exports = (app) => {
       return console.log(data);
     }
     getCoins();
-    res.render("index");
-  });
-  router.get("/login", (req, res) => {
-    res.render("login");
+    res.render("product");
   });
   app.use("/", router);
 };
