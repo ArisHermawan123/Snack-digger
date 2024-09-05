@@ -1,10 +1,11 @@
 const express = require("express");
+const co = require("cors");
+
 const app = express();
 
 const response = require("./src/utils/responses");
 const db = require("./src/database/config/db.config");
 const router = require("./src/routers/routes");
-const cors = require("cors");
 
 require("dotenv").config();
 require("./src/routers/index.routes")(app);
@@ -16,7 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/public", express.static("public"));
 app.use(router);
-app.use(cors());
+app.use(co());
 
 app.all("*", (req, res, next) => {
   response(res, 404, "Page Not Found");
