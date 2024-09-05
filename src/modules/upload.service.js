@@ -9,4 +9,22 @@ const UploadImage = async ({ image_url }) => {
   }
 };
 
-module.exports = { UploadImage };
+const GetImageData = async ({ DataResult }) => {
+  try {
+    const dataImage = await model.findAndCountAll({ data: DataResult });
+    return dataImage;
+  } catch (error) {
+    console.log({ message: "Data Tidak ditemukan" });
+  }
+};
+
+const DeleteDataById = async ({ removeImage }) => {
+  try {
+    const dataDelete = await model.destroy({ delete: removeImage });
+    return dataDelete;
+  } catch (error) {
+    console.log({ message: "Delete data gagal" });
+  }
+};
+
+module.exports = { UploadImage, GetImageData, DeleteDataById };
