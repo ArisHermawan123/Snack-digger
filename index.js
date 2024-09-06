@@ -1,23 +1,26 @@
 const express = require("express");
 const cors = require("cors");
+const session = require("express-session");
 
 const app = express();
 
 const response = require("./src/utils/responses");
 const db = require("./src/database/config/db.config");
 const router = require("./src/routers/routes");
+const LogRoutes = require("./src/controllers/model.login/routes.login");
 
 require("dotenv").config();
 require("./src/routers/index.routes")(app);
 require("./src/routers/home.routes")(app);
 require("./src/routers/product.routes")(app);
-require("./src/routers/login.routes")(app);
 
 app.set("views", "./src/views");
 app.set("view engine", "ejs");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/public", express.static("public"));
+app.use(session({ secret: "randomstringsessionscret" }));
+app.use(LogRoutes);
 app.use(router);
 app.use(cors());
 
