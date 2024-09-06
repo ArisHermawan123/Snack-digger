@@ -11,6 +11,7 @@ require("dotenv").config();
 require("./src/routers/index.routes")(app);
 require("./src/routers/home.routes")(app);
 require("./src/routers/product.routes")(app);
+require("./src/routers/login.routes")(app);
 
 app.set("views", "./src/views");
 app.set("view engine", "ejs");

@@ -8,6 +8,7 @@ const GetDataFromApi = async ({ dataProduct }) => {
     console.log(error.message);
   }
 };
+
 const UploadDataToApi = async ({ DescData }) => {
   try {
     const DataDesc = await modelServicesProduct.create(DescData);

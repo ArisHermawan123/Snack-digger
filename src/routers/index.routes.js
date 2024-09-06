@@ -11,8 +11,5 @@ module.exports = (app) => {
     getCoins();
     res.render("index");
   });
-  router.get("/login", (req, res) => {
-    res.render("login");
-  });
   app.use("/", router);
 };

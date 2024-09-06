@@ -1,3 +1,4 @@
+const { removeTicks } = require("sequelize/lib/utils");
 const modelPorducts = require("../../database/models/desc");
 const response = require("../../utils/responses");
 
@@ -11,27 +12,19 @@ const GetDataFromApi = async (req, res) => {
 };
 
 const UploadDataToApi = async (req, res) => {
-  const product = {
-    name: req.body.name,
-    description: req.body.description,
-    price: req.body.price,
-  };
-
-  if (!req.body.name && !req.body.description && !req.body.price) {
-    return response(res, 404, { message: "Name can not be emty" });
-  }
-
+  const { name: name, description: description, price: price } = req.body;
   try {
-    const DescData = await modelPorducts.create(product);
-    return response(res, 201, { product: DescData });
+    const data = await modelPorducts.create({ name, description, price });
+    return response(res, 201, { product: data });
   } catch (error) {
+    console.log(error.message);
     return response(res, 500, { message: error.message, stack: error.stack });
   }
 };
 
 const DeleteDataFromAPi = async (req, res) => {
   try {
-    const DeleteData = await Product.findOne({
+    const DeleteData = await modelPorducts.findOne({
       where: {
         id: req.params.id,
       },
@@ -43,7 +36,7 @@ const DeleteDataFromAPi = async (req, res) => {
       },
     });
 
-    return response(res, 200, { remove: removeData });
+    return response(res, 200, { remove: removeData, status: "Berhasil Remove" });
   } catch (error) {
     return response(res, 500, { message: error.message, stack: error.stack });
   }
