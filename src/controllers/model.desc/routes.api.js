@@ -1,6 +1,6 @@
 const express = require("express");
 const uploadRoutesApi = express.Router();
-const controllerApi = require("./controller.api");
+const controllerApi = require("../model.desc/controller.api");
 
 uploadRoutesApi.get("/", controllerApi.GetDataFromApi);
 uploadRoutesApi.post("/up", controllerApi.UploadDataToApi);

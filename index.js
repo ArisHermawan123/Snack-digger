@@ -1,5 +1,5 @@
 const express = require("express");
-const co = require("cors");
+const cors = require("cors");
 
 const app = express();
 
@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/public", express.static("public"));
 app.use(router);
-app.use(co());
+app.use(cors());
 
 app.all("*", (req, res, next) => {
   response(res, 404, "Page Not Found");

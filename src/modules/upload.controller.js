@@ -23,7 +23,7 @@ const UploadImage = async (req, res, err) => {
 const GetImageData = async (req, res) => {
   try {
     const DataResult = await Product.findAndCountAll();
-    return response(res, 201, { data: DataResult.rows }, { message: "Get data Berhasil" });
+    return response(res, 201, { data: DataResult.rows });
   } catch (error) {
     return response(res, 404, { message: error.message, stack: error?.stack });
   }

@@ -1,8 +1,8 @@
 const { DataTypes } = require("sequelize");
 const db = require("../config/db.config");
 
-const desc = db.define(
-  "descs",
+const User = db.define(
+  "User",
   {
     id: {
       allowNull: false,
@@ -10,22 +10,18 @@ const desc = db.define(
       primaryKey: true,
       type: DataTypes.INTEGER,
     },
-    name: {
+    email: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    description: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    price: {
+    password: {
       type: DataTypes.STRING,
       allowNull: false,
     },
   },
-  { tableName: "descs" }
+  { tableName: "User" }
 );
 
 db.sync();
 
-module.exports = desc;
+module.exports = User;
