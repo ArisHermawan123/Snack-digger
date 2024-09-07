@@ -18,6 +18,7 @@ const User = db.define(
     password: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
     },
   },
   { tableName: "User" }

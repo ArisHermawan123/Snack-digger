@@ -4,12 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link href="/public/assets/style.css" rel="stylesheet" type="text/css" />
+    <link href="/public/styles/style.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
   </head>
   <body>
     <section class="container-form">
-      <form class="form" action="#">
+      <form method="POST" class="form" action="/login">
         <div class="form-input-left">
           <div class="form-input-column-left">
             <div class="form-title">
@@ -18,12 +18,14 @@
             <div class="form-wrapper-input-email">
               <div class="form-input-email-field">
                 <input
+                  name="email"
                   class="form-input-email"
                   type="email
                   "
                   placeholder="Masukan email"
                   autocomplete="off
                   "
+                  autofocus="true"
                 />
               </div>
               <div class="form-span-error-email">
@@ -33,7 +35,7 @@
             </div>
             <div class="form-wrapper-input-password">
               <div class="form-input-password-field">
-                <input class="form-input-password" type="password" placeholder="Masukan password" autocomplete="off" />
+                <input name="password" class="form-input-password" type="password" placeholder="Masukan password" autocomplete="off" />
                 <span><i class="fa fa-eye"></i></span>
               </div>
               <div class="form-span-error-password">
@@ -49,9 +51,7 @@
               <a class="form-forgot-password" href=""> Lupa password </a>
             </div>
             <div class="form-login">
-              <button class="form-login-button" type="submit">
-                <a href="../frontend/home.html">Masuk</a>
-              </button>
+              <button class="form-login-button" type="submit">Masuk</button>
             </div>
 
             <div class="form-separator">
@@ -77,5 +77,6 @@
         </div>
       </form>
     </section>
+    <script src="../../../public/script/index.js"></script>
   </body>
 </html>

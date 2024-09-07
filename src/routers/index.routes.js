@@ -9,7 +9,7 @@ module.exports = (app) => {
       return console.log(data);
     }
     getCoins();
-    res.render("index");
+    res.render("home/index");
   });
   app.use("/", router);
 };

@@ -9,7 +9,10 @@ module.exports = (app) => {
       return console.log(data);
     }
     getCoins();
-    res.render("product");
+    res.render("partials/product");
+  });
+  router.get("/product/upload-sell", (req, res) => {
+    res.render("partials/upload-sell");
   });
   app.use("/", router);
 };

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link href="/public/assets/style.css" rel="stylesheet" type="text/css" />
+    <link href="/public/styles/style.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
     <header>
@@ -20,16 +20,9 @@
             </h1>
           </div>
           <div class="wrapper-nav-list-menu">
-            <div class="nav-input-search-product">
-              <input class="nav-search-product" type="search" placeholder="Cari Product" />
-              <div class="nav-button-search">
-                <i data-feather="search" class="icon-nav-search"></i>
-              </div>
-            </div>
             <div class="nav-icon-book-home">
               <i data-feather="book-open" class="icon-book-open" onclick="HandleDropDown()"></i>
             </div>
-
             <div class="con-wrapp-icon-button">
               <div class="wrapper-icon-button">
                 <div class="nav-icon-shopping">
@@ -50,45 +43,7 @@
         </div>
       </nav>
     </header>
-    <section class="section">
-      <div class="container-product-shopping-cart">
-        <div class="product-shopping-cart-column">
-          <div class="product-shopping-cart-list-1">
-            <div class="product-shopping-fill-1-1">
-              <input type="checkbox" />
-              <label>Pilih semua product</label>
-            </div>
-            <div class="product-shopping-fill-1-2">
-              <a>Harga satuan</a>
-              <a>Kuantitas</a>
-              <a>Total harga</a>
-            </div>
-          </div>
-          <div class="product-shopping-cart-list-2">
-            <div class="product-shopping-fill-2-1">
-              <input type="checkbox" />
-              <label>Pilih product</label>
-            </div>
-            <div class="product-shopping-fill-2-2">
-              <a>Harga satuan</a>
-              <a>Kuantitas</a>
-              <a>Total harga</a>
-            </div>
-          </div>
-          <div class="product-shopping-cart-list-3">
-            <div class="product-shopping-fill-3-1">
-              <input type="checkbox" />
-              <label>Pilih product</label>
-            </div>
-            <div class="product-shopping-fill-3-2">
-              <a>Harga satuan</a>
-              <a>Kuantitas</a>
-              <a>Total harga</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <section class="section"></section>
     <footer>
       <div class="container-footer-shooping">
         <div class="column-footer-shopping">
@@ -126,9 +81,10 @@
         </div>
       </div>
     </footer>
+    <script src="../../../public/script/index.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script>
+      feather.replace();
+    </script>
   </body>
-  <script src="https://unpkg.com/feather-icons"></script>
-  <script>
-    feather.replace();
-  </script>
 </html>
