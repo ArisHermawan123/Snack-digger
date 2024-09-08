@@ -10,6 +10,15 @@ const storage = multer.diskStorage({
   },
 });
 
+const deleteImageByMr = async (req, res) => {
+  await uploadToRemoteBucket(req.file.path);
+
+  // Delete the file like normal
+  await unlinkAsync(req.file.path);
+
+  res.end("UPLOAD COMPLETED!");
+};
+
 const fileFilter = (req, file, cb) => {
   const allowedFormats = ["image/jpg", "image/jpeg", "image/png", "image/svg+xml"];
 
@@ -31,4 +40,5 @@ const upload = multer({
   fileFilter: fileFilter,
 });
 
+module.exports = { deleteImageByMr };
 module.exports = upload;

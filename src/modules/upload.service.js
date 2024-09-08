@@ -18,9 +18,9 @@ const GetImageData = async ({ DataResult }) => {
   }
 };
 
-const DeleteDataById = async ({ removeImage }) => {
+const DeleteDataById = async ({ product }) => {
   try {
-    const dataDelete = await model.destroy({ delete: removeImage });
+    const dataDelete = await model.destroy({ delete: product });
     return dataDelete;
   } catch (error) {
     console.log({ message: "Delete data gagal" });

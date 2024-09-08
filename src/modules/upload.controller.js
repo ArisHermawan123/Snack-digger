@@ -2,7 +2,6 @@ const service = require("./upload.service");
 const uploadFile = require("../middlewares/upload/cloudinary");
 const response = require("../utils/responses");
 const Product = require("../database/models/images");
-const fs = require("fs");
 
 const UploadImage = async (req, res, err) => {
   try {
@@ -42,9 +41,6 @@ const DeleteDataById = async (req, res) => {
         id: req.params.id,
       },
     });
-
-    const filePath = `./public/images/${DeleteData.images.image_url}`;
-    fs.unlinkSync(filePath);
 
     return response(res, 200, { remove: removeImage });
   } catch (error) {

@@ -1,4 +1,3 @@
-const { removeTicks } = require("sequelize/lib/utils");
 const modelPorducts = require("../../database/models/desc");
 const response = require("../../utils/responses");
 
