@@ -1,10 +1,10 @@
 const express = require("express");
-const uploadRoutes = express.Router();
+const uploadRoutesImage = express.Router();
 const upload = require("../middlewares/upload/multer.middleware");
 const controller = require("./upload.controller");
 
-uploadRoutes.post("", upload.single("image"), controller.UploadImage);
-uploadRoutes.get("", controller.GetImageData);
-uploadRoutes.delete("/delete/:id", controller.DeleteDataById);
+uploadRoutesImage.post("", upload.single("image"), controller.UploadDataImage);
+uploadRoutesImage.get("", controller.GetDataImage);
+uploadRoutesImage.delete("/delete/:id", controller.DeleteDataImage);
 
-module.exports = uploadRoutes;
+module.exports = uploadRoutesImage;

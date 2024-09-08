@@ -1,7 +1,7 @@
 const modelPorducts = require("../../database/models/desc");
 const response = require("../../utils/responses");
 
-const GetDataFromApi = async (req, res) => {
+const GetDataDescs = async (req, res) => {
   try {
     const dataProduct = await modelPorducts.findAndCountAll();
     return response(res, 201, { data: dataProduct.rows });
@@ -10,18 +10,17 @@ const GetDataFromApi = async (req, res) => {
   }
 };
 
-const UploadDataToApi = async (req, res) => {
+const UploadDataDescs = async (req, res) => {
   const { name: name, description: description, price: price } = req.body;
   try {
     const data = await modelPorducts.create({ name, description, price });
     return response(res, 201, { product: data });
   } catch (error) {
-    console.log(error.message);
     return response(res, 500, { message: error.message, stack: error.stack });
   }
 };
 
-const DeleteDataFromAPi = async (req, res) => {
+const DeleteDataDescs = async (req, res) => {
   try {
     const DeleteData = await modelPorducts.findOne({
       where: {
@@ -41,4 +40,6 @@ const DeleteDataFromAPi = async (req, res) => {
   }
 };
 
-module.exports = { GetDataFromApi, UploadDataToApi, DeleteDataFromAPi };
+const UpdateDataDescs = async (req, res) => {};
+
+module.exports = { GetDataDescs, UploadDataDescs, DeleteDataDescs, UpdateDataDescs };

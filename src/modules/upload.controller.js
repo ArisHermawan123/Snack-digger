@@ -3,7 +3,7 @@ const uploadFile = require("../middlewares/upload/cloudinary");
 const response = require("../utils/responses");
 const Product = require("../database/models/images");
 
-const UploadImage = async (req, res, err) => {
+const UploadDataImage = async (req, res, err) => {
   try {
     const { file } = req;
     if (!file) return response(res, 400, { message: err.message, stack: err?.stack });
@@ -11,7 +11,7 @@ const UploadImage = async (req, res, err) => {
     const upload = await uploadFile(file.path, "your folder path you have created on cloudinary.");
     const { secure_url: image_url } = upload;
 
-    const result = await service.UploadImage({ image_url });
+    const result = await service.UploadDataImage({ image_url });
 
     return response(res, 201, result);
   } catch (error) {
@@ -19,7 +19,7 @@ const UploadImage = async (req, res, err) => {
   }
 };
 
-const GetImageData = async (req, res) => {
+const GetDataImage = async (req, res) => {
   try {
     const DataResult = await Product.findAndCountAll();
     return response(res, 201, { data: DataResult.rows });
@@ -28,7 +28,7 @@ const GetImageData = async (req, res) => {
   }
 };
 
-const DeleteDataById = async (req, res) => {
+const DeleteDataImage = async (req, res) => {
   try {
     const DeleteData = await Product.findOne({
       where: {
@@ -48,4 +48,4 @@ const DeleteDataById = async (req, res) => {
   }
 };
 
-module.exports = { UploadImage, GetImageData, DeleteDataById };
+module.exports = { UploadDataImage, GetDataImage, DeleteDataImage };

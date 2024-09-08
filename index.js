@@ -8,7 +8,6 @@ const app = express();
 const response = require("./src/utils/responses");
 const db = require("./src/database/config/db.config");
 const router = require("./src/routers/routes");
-const AccountRoutes = require("./src/controllers/model.login/controllers");
 const HomeRoutes = require("./src/controllers/model.login/controller.login");
 
 require("dotenv").config();
@@ -23,7 +22,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/public", express.static("public"));
 app.use(session({ secret: "randomstringsessionscret" }));
-app.use("/", AccountRoutes.AccountRoutes);
 app.use(router);
 app.use(cors());
 

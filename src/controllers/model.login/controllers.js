@@ -1,15 +1,12 @@
-const express = require("express");
 const models = require("../../database/models/user");
 const Sequelize = require("sequelize");
 const bcrypt = require("bcrypt");
 
-const accountRoutes = express.Router();
-
-accountRoutes.get("/login", function (req, res) {
+const FrontLogin = (req, res) => {
   res.render("auth/login");
-});
+};
 
-accountRoutes.post("/login", function (req, res) {
+const FrontRunLogin = (req, res) => {
   const matched_users_promise = models.findAll({
     where: Sequelize.and({ email: req.body.email }),
   });
@@ -25,6 +22,6 @@ accountRoutes.post("/login", function (req, res) {
       }
     }
   });
-});
+};
 
-module.exports = { AccountRoutes: accountRoutes };
+module.exports = { FrontLogin, FrontRunLogin };

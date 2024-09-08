@@ -1,6 +1,6 @@
 const model = require("../database/models/images");
 
-const UploadImage = async ({ image_url }) => {
+const UploadDataImage = async ({ image_url }) => {
   try {
     const data = await model.create({ image_url: image_url });
     return data;
@@ -9,7 +9,7 @@ const UploadImage = async ({ image_url }) => {
   }
 };
 
-const GetImageData = async ({ DataResult }) => {
+const GetDataImage = async ({ DataResult }) => {
   try {
     const dataImage = await model.findAndCountAll({ data: DataResult });
     return dataImage;
@@ -18,7 +18,7 @@ const GetImageData = async ({ DataResult }) => {
   }
 };
 
-const DeleteDataById = async ({ product }) => {
+const DeleteDataImage = async ({ product }) => {
   try {
     const dataDelete = await model.destroy({ delete: product });
     return dataDelete;
@@ -27,4 +27,4 @@ const DeleteDataById = async ({ product }) => {
   }
 };
 
-module.exports = { UploadImage, GetImageData, DeleteDataById };
+module.exports = { UploadDataImage, GetDataImage, DeleteDataImage };
