@@ -9,11 +9,25 @@
   </head>
   <body>
     <section class="container-form">
-      <form method="POST" class="form" action="<%= url %>login/auth">
+      <form method="POST" class="form" action="<%= url %>register/save">
         <div class="form-input-left">
           <div class="form-input-column-left">
             <div class="form-title">
               <h1>Form Login</h1>
+            </div>
+            <div class="form-wrapper-input-username">
+              <div class="form-input-email-field">
+                <input
+                  name="username"
+                  class="form-input-username"
+                  type="text
+                  "
+                  placeholder="Username Anda"
+                  autocomplete="off
+                  "
+                  autofocus="true"
+                />
+              </div>
             </div>
             <div class="form-wrapper-input-email">
               <div class="form-input-email-field">
@@ -51,8 +65,7 @@
               <a class="form-forgot-password" href=""> Lupa password </a>
             </div>
             <div class="form-login">
-              <button class="form-login-button" type="submit">Masuk</button>
-              <a href="<%= url %>register"><button class="form-register-button">Register</button></a>
+              <button class="form-login-button" type="submit">Register</button>
             </div>
 
             <div class="form-separator">
@@ -78,6 +91,5 @@
         </div>
       </form>
     </section>
-    <script src="../../../public/script/index.js"></script>
   </body>
 </html>

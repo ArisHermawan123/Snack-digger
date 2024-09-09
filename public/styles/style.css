@@ -683,6 +683,14 @@ a {
   justify-content: center;
   align-items: center;
 }
+.form-input-username {
+  width: 300px;
+  height: 44px;
+  border-radius: 18px;
+  border: 1px solid rgb(175, 169, 169);
+  padding-left: 13px;
+  outline: none;
+}
 .form-input-email {
   width: 300px;
   height: 44px;
@@ -789,16 +797,31 @@ a {
   font-size: 12px;
 }
 .form-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.8rem;
 }
 .form-login-button {
   cursor: pointer;
-  width: 300px;
-  height: 44px;
+  width: 135px;
+  height: 40px;
+  border-radius: 18px;
+  border: none;
+  transition: 0.3s ease-in;
+}
+.form-register-button {
+  cursor: pointer;
+  width: 135px;
+  height: 40px;
   border-radius: 18px;
   border: none;
   transition: 0.3s ease-in;
 }
 .form-login-button:hover {
+  background-color: rgb(216, 216, 216);
+}
+.form-register-button:hover {
   background-color: rgb(216, 216, 216);
 }
 .form-separator {
@@ -1540,6 +1563,12 @@ a {
     align-items: center;
     padding: 1rem 0 1rem 0;
   }
+  .form-input-username {
+    width: 270px;
+    height: 44px;
+    border-radius: 18px;
+    padding-left: 13px;
+  }
   .form-input-email {
     width: 270px;
     height: 44px;
@@ -1573,13 +1602,23 @@ a {
     font-size: 12px;
   }
   .form-login {
+    gap: 1rem;
   }
   .form-login-button {
     cursor: pointer;
-    width: 270px;
-    height: 44px;
+    width: 125px;
+    height: 40px;
     border-radius: 18px;
     border: none;
+    transition: 0.3s ease-in;
+  }
+  .form-register-button {
+    cursor: pointer;
+    width: 125px;
+    height: 40px;
+    border-radius: 18px;
+    border: none;
+    transition: 0.3s ease-in;
   }
   .form-separator {
   }

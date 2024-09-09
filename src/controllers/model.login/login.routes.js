@@ -1,8 +1,10 @@
-const express = require("express");
-const accountRoutes = express.Router();
-const controller = require("../model.login/controllers");
+const routerLogin = require("express").Router();
+const loginController = require("./controller.login");
+const verifyUser = require("../../database/config/verify");
 
-accountRoutes.get("/login", controller.FrontLogin);
-accountRoutes.post("/login", controller.FrontRunLogin);
+routerLogin.get("/", verifyUser.isLogout, loginController.login);
+routerLogin.get("/logout", loginController.logout);
 
-module.exports = accountRoutes;
+routerLogin.post("/auth", loginController.loginAuth);
+
+module.exports = routerLogin;

@@ -2,13 +2,13 @@ const express = require("express");
 const cors = require("cors");
 const session = require("express-session");
 const ejsMate = require("ejs-mate");
+const flash = require("req-flash");
 
 const app = express();
 
 const response = require("./src/utils/responses");
 const db = require("./src/database/config/db.config");
 const router = require("./src/routers/routes");
-const HomeRoutes = require("./src/controllers/model.login/controller.login");
 
 require("dotenv").config();
 require("./src/routers/index.routes")(app);
@@ -23,16 +23,27 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/public", express.static("public"));
 app.use(session({ secret: "randomstringsessionscret" }));
 app.use(router);
+app.use(flash());
 app.use(cors());
 
+app.use(
+  session({
+    resave: false,
+    saveUninitialized: false,
+    secret: "t@1k0ch3ng",
+    name: "secretName",
+    cookie: {
+      sameSite: true,
+      maxAge: 60000,
+    },
+  })
+);
+
 app.use(function (req, res, next) {
-  if (req.session.email == null || req.session.email.length == 0) {
-    res.redirect("/login");
-  } else {
-    next();
-  }
+  res.setHeader("Cache-Control", "no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0");
+  res.setHeader("Pragma", "no-cache");
+  next();
 });
-app.use("/", HomeRoutes.HomeRoutes);
 
 app.all("*", (req, res, next) => {
   response(res, 404, "Page Not Found");
