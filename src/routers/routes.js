@@ -9,8 +9,8 @@ const uploadRotesLogin = require("../controllers/routes.login/login.routes");
 
 router.use("/image", uploadRoutesImage);
 router.use("/data", uploadRoutesApi);
-router.use("/", uploadRotesApp);
-router.use("/", uploadRotesRegist);
-router.use("/", uploadRotesLogin);
+router.use("/home", uploadRotesApp);
+router.use("/register", uploadRotesRegist);
+router.use("/login", uploadRotesLogin);
 
 module.exports = router;

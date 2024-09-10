@@ -1,4 +1,5 @@
 const config = require("../../database/models/user");
+require("dotenv").config();
 
 let pg = require("pg");
 let pool = new pg.Pool(config);

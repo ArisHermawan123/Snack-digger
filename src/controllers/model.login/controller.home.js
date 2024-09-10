@@ -1,3 +1,4 @@
+require("dotenv").config();
 module.exports = {
   home(req, res) {
     res.render("home/home", {
