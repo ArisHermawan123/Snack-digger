@@ -1,10 +1,11 @@
 const express = require("express");
+const router = express.Router();
+
 const uploadRoutesImage = require("../modules/upload.routes");
 const uploadRoutesApi = require("../controllers/model.desc/routes.api");
-const uploadRotesRegist = require("../../src/controllers/model.login/register.routes");
-const uploadRotesApp = require("../../src/controllers/model.login/app.routes");
-const uploadRotesLogin = require("../../src/controllers/model.login/login.routes");
-const router = express.Router();
+const uploadRotesRegist = require("../controllers/routes.login/register.routes");
+const uploadRotesApp = require("../controllers/routes.login/app.routes");
+const uploadRotesLogin = require("../controllers/routes.login/login.routes");
 
 router.use("/image", uploadRoutesImage);
 router.use("/data", uploadRoutesApi);
