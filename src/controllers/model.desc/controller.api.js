@@ -13,8 +13,8 @@ const GetDataDescs = async (req, res) => {
 const UploadDataDescs = async (req, res) => {
   const { name: name, description: description, price: price } = req.body;
   try {
-    const data = await modelPorducts.create({ name, description, price });
-    return response(res, 201, { product: data });
+    const dataDescs = await modelPorducts.create({ name, description, price });
+    return response(res, 201, { product: dataDescs, status: "Up Data Berhasil" });
   } catch (error) {
     return response(res, 500, { message: error.message, stack: error.stack });
   }
@@ -40,6 +40,11 @@ const DeleteDataDescs = async (req, res) => {
   }
 };
 
-const UpdateDataDescs = async (req, res) => {};
+const UpdateDataDescs = async (req, res) => {
+  try {
+  } catch (error) {
+    return response(res, 500, { message: error.message, stack: error.stack });
+  }
+};
 
 module.exports = { GetDataDescs, UploadDataDescs, DeleteDataDescs, UpdateDataDescs };
