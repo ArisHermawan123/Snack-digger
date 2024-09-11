@@ -1,4 +1,5 @@
 const config = require("../../database/models/user");
+const response = require("../../utils/responses");
 require("dotenv").config();
 
 let pg = require("pg");
@@ -8,49 +9,55 @@ pool.on("error", (err) => {
   console.error(err);
 });
 
-module.exports = {
-  // Render tampilan untuk login yang ada didalam folder 'src/views/login.ejs'
-  login(req, res) {
+const login = (req, res) => {
+  try {
     res.render("auth/login", {
       url: `${process.env.BASE_URL}\n/`,
-      // Kirim juga library flash yang telah di set
       colorFlash: req.flash("color"),
       statusFlash: req.flash("status"),
       pesanFlash: req.flash("message"),
     });
-  },
-  loginAuth(req, res) {
-    let email = req.body.email;
-    let password = req.body.password;
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+const loginAuth = async (req, res) => {
+  const { email: email, password: password } = req.body;
+  try {
     if (email && password) {
-      pool.getConnection(function (err, connection) {
-        if (err) throw err;
-        connection.query(`SELECT * FROM table_user WHERE user_email = ? AND user_password = SHA2(?,512)`, [email, password], function (error, results) {
-          if (error) throw error;
-          if (results.length > 0) {
-            // Jika data ditemukan, set sesi user tersebut menjadi true
-            req.session.loggedin = true;
-            req.session.userid = results[0].user_id;
-            req.session.username = results[0].user_name;
-            res.redirect("/");
-          } else {
-            // Jika data tidak ditemukan, set library flash dengan pesan error yang diinginkan
-            req.flash("color", "danger");
-            req.flash("status", "Oops..");
-            req.flash("message", "Akun tidak ditemukan");
-            res.redirect("/login");
-          }
-        });
-        connection.release();
+      const poolLog = await config.create({ email, password });
+      if (err) throw err;
+      connection.query(`SELECT * FROM User WHERE email = ? AND password = SHA2(?,512)`, [email, password], function (error, results) {
+        if (error) throw error;
+        if (results.length > 0) {
+          // Jika data ditemukan, set sesi user tersebut menjadi true
+          req.session.loggedin = true;
+          req.session.userid = results[0].user_id;
+          req.session.username = results[0].user_name;
+          res.redirect("/");
+        } else {
+          // Jika data tidak ditemukan, set library flash dengan pesan error yang diinginkan
+          req.flash("color", "danger");
+          req.flash("status", "Oops..");
+          req.flash("message", "Akun tidak ditemukan");
+          res.redirect("/login");
+        }
       });
+      connection.release();
+
+      response(res, 201, poolLog);
     } else {
       res.redirect("/login");
       res.end();
     }
-  },
-  // Fungsi untuk logout | Cara memanggilnya menggunakan url/rute 'http://localhost:5050/login/logout'
-  logout(req, res) {
-    // Hapus sesi user dari broser
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+// Fungsi untuk logout | Cara memanggilnya menggunakan url/rute 'http://localhost:5050/login/logout'
+const logout = (req, res) => {
+  try {
     req.session.destroy((err) => {
       if (err) {
         return console.log(err);
@@ -59,5 +66,10 @@ module.exports = {
       res.clearCookie("secretname");
       res.redirect("/login");
     });
-  },
+  } catch (error) {
+    console.log(error.message);
+  }
+  // Hapus sesi user dari broser
 };
+
+module.exports = { login, loginAuth, logout };

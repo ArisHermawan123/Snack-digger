@@ -11,26 +11,28 @@ pool.on("error", (err) => {
   console.error(err);
 });
 
-module.exports = {
-  // Fungsi untuk merender file register yang ada pada folder 'src/views/register.ejs'
-  formRegister(req, res) {
+// Fungsi untuk merender file register yang ada pada folder 'src/views/register.ejs'
+const formRegister = (req, res) => {
+  try {
     res.render("auth/register", {
       // Definisikan semua varibel yang ingin ikut dirender kedalam register.ejs
       url: `${process.env.BASE_URL}\n/`,
     });
-  },
-  // Fungsi untuk menyimpan data
-  saveRegister(req, res) {
-    // Tampung inputan user kedalam varibel username, email dan password
-    let username = req.body.username;
-    let email = req.body.email;
-    let password = req.body.password;
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+// Fungsi untuk menyimpan data
+const saveRegister = (req, res) => {
+  // Tampung inputan user kedalam varibel username, email dan password
+  const { username: username, email: email, password: password } = req.body;
+  try {
     // Pastikan semua varibel terisi
     if (username && email && password) {
       // Panggil koneksi dan eksekusi query
       pool.getConnection(function (err, connection) {
         if (err) throw err;
-        connection.query(`INSERT INTO table_user (user_name,user_email,user_password) VALUES (?,?,SHA2(?,512));`, [username, email, password], function (error, results) {
+        connection.query(`INSERT INTO User (username,email,password) VALUES (?,?,SHA2(?,512));`, [username, email, password], function (error, results) {
           if (error) throw error;
           // Jika tidak ada error, set library flash untuk menampilkan pesan sukses
           req.flash("color", "success");
@@ -47,5 +49,9 @@ module.exports = {
       res.redirect("/login");
       res.end();
     }
-  },
+  } catch (error) {
+    console.log(error.message);
+  }
 };
+
+module.exports = { formRegister, saveRegister };

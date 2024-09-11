@@ -14,8 +14,9 @@ const UploadDataDescs = async (req, res) => {
   const { name: name, description: description, price: price } = req.body;
   try {
     const dataDescs = await modelPorducts.create({ name, description, price });
-    return response(res, 201, { product: dataDescs, status: "Up Data Berhasil" });
+    return response(res, 201, { product: dataDescs });
   } catch (error) {
+    console.log(error.message);
     return response(res, 500, { message: error.message, stack: error.stack });
   }
 };
