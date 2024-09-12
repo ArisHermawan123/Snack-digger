@@ -1,6 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 const ejsMate = require("ejs-mate");
+const session = require("express-session");
+const flash = require("req-flash");
 
 const app = express();
 
@@ -18,8 +20,23 @@ app.set("views", __dirname + "/src/views");
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 app.use("/public", express.static("public"));
+app.use(flash());
 app.use(cors());
 app.use(router);
+
+// Configurasi library session
+app.use(
+  session({
+    resave: false,
+    saveUninitialized: false,
+    secret: "t@1k0ch3ng",
+    name: "secretName",
+    cookie: {
+      sameSite: true,
+      maxAge: 60000,
+    },
+  })
+);
 
 app.all("*", (req, res, next) => {
   response(res, 404, "Page Not Found");
