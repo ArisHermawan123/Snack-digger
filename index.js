@@ -1,8 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const session = require("express-session");
 const ejsMate = require("ejs-mate");
-const flash = require("req-flash");
 
 const app = express();
 
@@ -20,29 +18,8 @@ app.set("views", __dirname + "/src/views");
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 app.use("/public", express.static("public"));
-app.use(session({ secret: "randomstringsessionscret" }));
-app.use(flash());
 app.use(cors());
 app.use(router);
-
-app.use(
-  session({
-    resave: false,
-    saveUninitialized: false,
-    secret: "t@1k0ch3ng",
-    name: "secretName",
-    cookie: {
-      sameSite: true,
-      maxAge: 60000,
-    },
-  })
-);
-
-app.use(function (req, res, next) {
-  res.setHeader("Cache-Control", "no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0");
-  res.setHeader("Pragma", "no-cache");
-  next();
-});
 
 app.all("*", (req, res, next) => {
   response(res, 404, "Page Not Found");
