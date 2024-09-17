@@ -164,6 +164,59 @@ a {
   font-size: 28px;
   color: var(--bg-dark);
 }
+
+.wrapper-profile-username {
+  margin: 5rem;
+  display: flex;
+  justify-content: center;
+}
+.con-profile-username {
+  display: flex;
+  align-items: center;
+  border: 1px solid rgb(183, 182, 182);
+  border-radius: 5px;
+  width: 450px;
+  height: 200px;
+  padding: 2rem;
+}
+.con-profile-wrapp {
+  line-height: 43px;
+}
+.con-profile-name {
+  display: flex;
+  gap: 0.7rem;
+}
+.con-profile-name label {
+}
+.con-profile-name .input-profile-name {
+  padding-left: 0.6rem;
+  width: 260px;
+  height: 32px;
+  border-radius: 4px;
+  border: 1px solid rgb(183, 182, 182);
+  background-color: rgba(173, 166, 166, 0.205);
+}
+.con-profile-email {
+  display: flex;
+  gap: 0.7rem;
+}
+.con-profile-email label {
+}
+.con-profile-email .input-profile-email {
+  padding-left: 0.6rem;
+  width: 260px;
+  height: 32px;
+  border-radius: 4px;
+  border: 1px solid rgb(183, 182, 182);
+  background-color: rgba(173, 166, 166, 0.205);
+}
+.con-prof-username {
+  display: flex;
+  gap: 2rem;
+}
+.profile a:hover {
+  border-bottom: 1px solid var(--bg-dark);
+}
 .button-login {
   background-color: var(--bg-smoot-p);
   width: 75px;

@@ -1,4 +1,5 @@
 const config = require("../../database/models/user");
+const { QueryTypes } = require("sequelize");
 require("dotenv").config();
 
 let pg = require("pg").Pool;
@@ -16,29 +17,26 @@ const login = (req, res) => {
   });
 };
 // Post / kirim data yang diinput user
-const loginAuth = (req, res) => {
+const loginAuth = async (req, res) => {
   let email = req.body.email;
   let password = req.body.password;
   if (email && password) {
-    pool.getConnection(function (err, connection) {
-      if (err) throw err;
-      connection.query(`SELECT * FROM user WHERE email = ? AND password = SHA2(?,512)`, [email, password], function (error, results) {
-        if (error) throw error;
-        if (results.length > 0) {
-          // Jika data ditemukan, set sesi user tersebut menjadi true
-          req.session.loggedin = true;
-          req.session.id = results[0].id;
-          req.session.username = results[0].username;
-          res.redirect("/");
-        } else {
-          // Jika data tidak ditemukan, set library flash dengan pesan error yang diinginkan
-          req.flash("color", "danger");
-          req.flash("status", "Oops..");
-          req.flash("message", "Akun tidak ditemukan");
-          res.redirect("/login");
-        }
-      });
-      connection.release();
+    if (err) throw err;
+    sequelize.query(`SELECT * FROM user WHERE email = ? AND password = SHA2(?,512)`, [email, password], function (error, results) {
+      if (results.length > 0) {
+        // Jika data ditemukan, set sesi user tersebut menjadi true
+        req.session.loggedin = true;
+        req.session.id = results[0].id;
+        req.session.username = results[0].username;
+        res.redirect("/");
+      } else {
+        // Jika data tidak ditemukan, set library flash dengan pesan error yang diinginkan
+        req.flash("color", "danger");
+        req.flash("status", "Oops..");
+        req.flash("message", "Akun tidak ditemukan");
+        res.redirect("/login");
+      }
+      type: QueryTypes.SELECT;
     });
   } else {
     res.redirect("/login");
