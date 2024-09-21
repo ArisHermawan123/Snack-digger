@@ -1,13 +1,8 @@
 const config = require("../../database/models/user");
-const { QueryTypes } = require("sequelize");
+const bycpt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const response = require("../../utils/responses");
 require("dotenv").config();
-
-let pg = require("pg").Pool;
-let pool = new pg({ config });
-
-pool.on("error", (err) => {
-  console.error(err);
-});
 
 // Render tampilan untuk login yang ada didalam folder 'src/views/login.ejs'
 const login = (req, res) => {
@@ -18,27 +13,19 @@ const login = (req, res) => {
 };
 // Post / kirim data yang diinput user
 const loginAuth = async (req, res) => {
-  let email = req.body.email;
-  let password = req.body.password;
-  if (email && password) {
-    if (err) throw err;
-    sequelize.query(`SELECT * FROM user WHERE email = ? AND password = SHA2(?,512)`, [email, password], function (error, results) {
-      if (results.length > 0) {
-        // Jika data ditemukan, set sesi user tersebut menjadi true
-        req.session.loggedin = true;
-        req.session.id = results[0].id;
-        req.session.username = results[0].username;
-        res.redirect("/");
-      } else {
-        // Jika data tidak ditemukan, set library flash dengan pesan error yang diinginkan
-        req.flash("color", "danger");
-        req.flash("status", "Oops..");
-        req.flash("message", "Akun tidak ditemukan");
-        res.redirect("/login");
-      }
-      type: QueryTypes.SELECT;
-    });
+  const user = await config.findOne({ where: { email: req.body.email } });
+  if (user) {
+    const ValidPass = await bycpt.compare(req.body.password, user.password);
+    if (ValidPass) {
+      const TokenJwt = jwt.sign({ id: user.id, email: user.email }, process.env.JSONTOKEN);
+      response(res, 201, { TokenJwt: TokenJwt });
+      res.redirect("/");
+    } else {
+      response(res, 400, { message: "Password Incorrect" });
+      res.redirect("/login");
+    }
   } else {
+    response(res, 404, { message: "User does not exist" });
     res.redirect("/login");
     res.end();
   }
