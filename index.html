@@ -16,7 +16,7 @@
             </figure>
             <h1>
               Sna<span class="logo-title-c">c</span>k
-              <span class="logo-title-digger"><span class="logo-title-d">D</span>igger</span>
+              <a href="<%= url %>" class="logo-title-digger"><span class="logo-title-d">D</span>igger</a>
             </h1>
           </div>
           <div class="wrapper-nav-list-menu">
@@ -26,7 +26,12 @@
             <div class="con-wrapp-icon-button">
               <div class="wrapper-icon-button">
                 <div class="nav-icon-shopping">
-                  <a href="./home/shopping-cart">
+                  <a href="">
+                    <div class="nav-menu-wrapper">
+                      <i data-feather="align-center" class="nav-icon-shopping-card" onclick="HnadleDropdownProfile()"></i>
+                    </div>
+                  </a>
+                  <a href="">
                     <div class="nav-shopping-wrapper">
                       <i data-feather="shopping-cart" class="nav-icon-shopping-card"></i>
                     </div>
@@ -38,11 +43,14 @@
                   </a>
                 </div>
                 <div class="con-prof-username">
+                  <div class="home">
+                    <a href="<%= url %>">Home</a>
+                  </div>
                   <div class="profile">
-                    <a href="">Profile</a>
+                    <a href="<%= url %>profile">Profile</a>
                   </div>
                   <div class="username">
-                    <a href="">lasjbdfjsadbf</a>
+                    <a href="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= userName %></a>
                   </div>
                 </div>
               </div>

@@ -12,16 +12,21 @@ const login = (req, res) => {
   });
 };
 // Post / kirim data yang diinput user
-const loginAuth = async (req, res) => {
+const loginAuth = async (req, res, err) => {
   const user = await config.findOne({ where: { email: req.body.email } });
   if (user) {
+    if (err) throw err;
     const ValidPass = await bycpt.compare(req.body.password, user.password);
-    if (ValidPass) {
+    if (ValidPass.length > 0) {
       const TokenJwt = jwt.sign({ id: user.id, email: user.email }, process.env.JSONTOKEN);
       response(res, 201, { TokenJwt: TokenJwt });
-      res.redirect("/");
+      req.session.loggedin = true;
+      res.redirect("/home");
     } else {
-      response(res, 400, { message: "Password Incorrect" });
+      response(res, 400, console.log({ message: "Gagal login" }));
+      req.flash("color", "danger");
+      req.flash("status", "Oops..");
+      req.flash("message", "Akun tidak ditemukan");
       res.redirect("/login");
     }
   } else {

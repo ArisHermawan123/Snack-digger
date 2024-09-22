@@ -1,13 +1,9 @@
 // Definisikan configurasi Database
 const config = require("../../database/models/user");
+const bycpt = require("bcrypt");
+const response = require("../../utils/responses");
 require("dotenv").config();
 // Gunakan library mysql
-let pg = require("pg").Pool;
-let pool = new pg({ config });
-
-pool.on("error", (err) => {
-  console.error(err);
-});
 
 // Fungsi untuk merender file register yang ada pada folder 'src/views/register.ejs'
 const formRegister = (req, res) => {
@@ -17,32 +13,15 @@ const formRegister = (req, res) => {
   });
 };
 // Fungsi untuk menyimpan data
-const saveRegister = (req, res) => {
-  // Tampung inputan user kedalam varibel username, email dan password
-  let username = req.body.username;
-  let email = req.body.email;
-  let password = req.body.password;
-  // Pastikan semua varibel terisi
-  if (username && email && password) {
-    // Panggil koneksi dan eksekusi query
-    pool.getConnection(function (err, connection) {
-      if (err) throw err;
-      connection.query(`INSERT INTO user (username,email,password) VALUES (?,?,SHA2(?,512));`, [username, email, password], function (error, results) {
-        if (error) throw error;
-        // Jika tidak ada error, set library flash untuk menampilkan pesan sukses
-        req.flash("color", "success");
-        req.flash("status", "Yes..");
-        req.flash("message", "Registrasi berhasil");
-        // Kembali kehalaman login
-        res.redirect("/login");
-      });
-      // Koneksi selesai
-      connection.release();
-    });
-  } else {
-    // Kondisi apabila variabel username, email dan password tidak terisi
-    res.redirect("/login");
-    res.end();
+const saveRegister = async (req, res) => {
+  const salt = await bycpt.genSalt(10);
+  try {
+    const UserRegist = { username: req.body.username, email: req.body.email, password: await bycpt.hash(req.body.password, salt) };
+    const CreateUSer = await config.create(UserRegist);
+    response(res, 201, { CreateUSer: CreateUSer });
+  } catch (error) {
+    console.log(error.message);
+    return response(res, 500, { message: error.message, stack: error.stack });
   }
 };
 

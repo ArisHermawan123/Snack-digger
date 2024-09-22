@@ -16,23 +16,22 @@
             </figure>
             <h1>
               Sna<span class="logo-title-c">c</span>k
-              <a href="<%= url%>login/auth" class="logo-title-digger"><span class="logo-title-d">D</span>igger</a>
+              <a href="<%= url %>" class="logo-title-digger"><span class="logo-title-d">D</span>igger</a>
             </h1>
           </div>
           <div class="wrapper-nav-list-menu">
-            <div class="nav-input-search-product">
-              <input class="nav-search-product" type="search" placeholder="Cari Product" />
-              <div class="nav-button-search">
-                <i data-feather="search" class="icon-nav-search"></i>
-              </div>
-            </div>
             <div class="nav-icon-book-home">
               <i data-feather="book-open" class="icon-book-open" onclick="HandleDropDown()"></i>
             </div>
             <div class="con-wrapp-icon-button">
               <div class="wrapper-icon-button">
                 <div class="nav-icon-shopping">
-                  <a href="./home/shopping-cart">
+                  <a href="">
+                    <div class="nav-shopping-wrapper">
+                      <i data-feather="align-center" class="nav-icon-shopping-card"></i>
+                    </div>
+                  </a>
+                  <a href="">
                     <div class="nav-shopping-wrapper">
                       <i data-feather="shopping-cart" class="nav-icon-shopping-card"></i>
                     </div>
@@ -42,6 +41,17 @@
                       <i data-feather="bell" class="nav-icon-bell"></i>
                     </div>
                   </a>
+                </div>
+                <div class="con-prof-username">
+                  <div class="home">
+                    <a href="<%= url %>">Home</a>
+                  </div>
+                  <div class="profile">
+                    <a href="<%= url %>profile">Profile</a>
+                  </div>
+                  <div class="username">
+                    <a href="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= userName %></a>
+                  </div>
                 </div>
               </div>
             </div>

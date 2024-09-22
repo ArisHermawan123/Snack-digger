@@ -5,5 +5,10 @@ const home = (req, res) => {
     userName: req.session.username,
   });
 };
+const index = (req, res) => {
+  res.render("home/index", {
+    url: `${process.env.BASE_URL}\n/`,
+  });
+};
 
-module.exports = { home };
+module.exports = { home, index };

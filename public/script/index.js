@@ -1,5 +1,6 @@
 const IsNavigation = document.querySelector(".container-nav");
-const IsWrapperDropdownNav = document.querySelector(".con-wrapp-icon-button");
+const IsWrapperDropdownNav = document.querySelector(".nav-icon-shopping");
+const IsWrapperProfileNav = document.querySelector(".con-prof-username");
 
 const form = document.querySelector(".form");
 const emailInput = document.querySelector(".form-input-email");
@@ -13,6 +14,14 @@ function HandleDropDown() {
     IsWrapperDropdownNav.style.display = "none";
   } else {
     IsWrapperDropdownNav.style.display = "flex";
+  }
+}
+function HnadleDropdownProfile() {
+  if (IsWrapperProfileNav.style.display === "flex") {
+    IsWrapperProfileNav.style.display = "none";
+    IsWrapperProfileNav.style.display = "flex";
+  } else {
+    IsWrapperProfileNav.style.display = "flex";
   }
 }
 
