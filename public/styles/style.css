@@ -129,10 +129,10 @@ a {
   padding-top: 1rem;
   display: none;
 }
+.nav-icon-menu-home {
+  display: none;
+}
 .nav-icon-book-home {
-  position: absolute;
-  top: 70px;
-  padding-top: 1rem;
   display: none;
 }
 .icon-book-open {
@@ -1215,6 +1215,12 @@ a {
     align-items: center;
     gap: 2rem;
   }
+  .weapper-list-menu-book {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+  }
   .nav-input-search-product {
     display: flex;
     align-items: center;
@@ -1253,15 +1259,20 @@ a {
     width: 15px;
     height: 15px;
   }
+  .nav-buutton-login {
+    position: absolute;
+    top: -110px;
+    right: 50px;
+  }
   .nav-icon-book-index {
     position: absolute;
     right: 30px;
     display: flex;
   }
+  .nav-icon-menu-home {
+    display: flex;
+  }
   .nav-icon-book-home {
-    position: absolute;
-    right: 20px;
-    top: 20px;
     display: flex;
   }
   .icon-book-open {
@@ -1284,15 +1295,15 @@ a {
     margin: 0 auto;
   }
   .nav-icon-shopping {
-    display: flex;
     position: absolute;
-    top: -100px;
-    right: 40px;
+    top: -35px;
+    right: -10px;
     gap: 0.5rem;
     display: none;
-  }
-  .nav-menu-wrapper {
-    display: flex;
+    width: 130px;
+    height: 30px;
+    background-color: var(--bg-smoot-p);
+    border-radius: 5px;
   }
   .nav-shopping-wrapper {
     display: flex;

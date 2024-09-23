@@ -16,12 +16,12 @@ function HandleDropDown() {
     IsWrapperDropdownNav.style.display = "flex";
   }
 }
+
 function HnadleDropdownProfile() {
-  if (IsWrapperProfileNav.style.display === "flex") {
+  if (IsWrapperProfileNav.style.display === "block") {
     IsWrapperProfileNav.style.display = "none";
-    IsWrapperProfileNav.style.display = "flex";
   } else {
-    IsWrapperProfileNav.style.display = "flex";
+    IsWrapperProfileNav.style.display = "block";
   }
 }
 
