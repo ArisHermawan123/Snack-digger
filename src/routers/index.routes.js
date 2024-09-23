@@ -1,4 +1,5 @@
 const router = require("express").Router();
+require("dotenv").config();
 
 module.exports = (app) => {
   router.get("/", (req, res) => {
@@ -9,7 +10,9 @@ module.exports = (app) => {
     //   return console.log(data);
     // }
     // getCoins();
-    res.render("home/index");
+    res.render("home/index", {
+      url: `${process.env.BASE_URL}\n/`,
+    });
   });
   app.use("/", router);
 };

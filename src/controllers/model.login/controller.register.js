@@ -15,13 +15,16 @@ const formRegister = (req, res) => {
 // Fungsi untuk menyimpan data
 const saveRegister = async (req, res) => {
   const salt = await bycpt.genSalt(10);
-  try {
-    const UserRegist = { username: req.body.username, email: req.body.email, password: await bycpt.hash(req.body.password, salt) };
-    const CreateUSer = await config.create(UserRegist);
-    response(res, 201, { CreateUSer: CreateUSer });
-  } catch (error) {
-    console.log(error.message);
-    return response(res, 500, { message: error.message, stack: error.stack });
+  const UserRegist = { username: req.body.username, email: req.body.email, password: await bycpt.hash(req.body.password, salt) };
+  if (UserRegist) {
+    const CreateUSer = await config.create(UserRegist, function (error, results) {
+      if (error) console.log("error");
+      response(res, 201, { CreateUSer: CreateUSer });
+      return res.redirect("/login");
+    });
+  } else {
+    res.redirect("/login");
+    res.end();
   }
 };
 

@@ -47,7 +47,7 @@ a {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  padding: 0 2rem 0 2rem;
+  padding: 0 4rem 0 4rem;
   position: fixed;
   width: 100%;
   background-color: var(--bg-light);
@@ -140,8 +140,8 @@ a {
 }
 .wrapper-icon-button {
   display: flex;
-  gap: 2rem;
   padding-top: 1rem;
+  gap: 1.5rem;
 }
 .nav-icon-shopping {
   display: flex;
@@ -221,7 +221,7 @@ a {
   align-items: center;
   flex-wrap: wrap;
   padding-top: 0.5rem;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 .con-prof-username .home,
 .profile {
@@ -902,6 +902,15 @@ a {
   border: none;
   transition: 0.3s ease-in;
 }
+.form-register-button-regist {
+  cursor: pointer;
+  width: 300px;
+  height: 40px;
+  border-radius: 18px;
+  border: none;
+  transition: 0.3s ease-in;
+}
+
 .form-login-button:hover {
   background-color: rgb(216, 216, 216);
 }
@@ -940,7 +949,11 @@ a {
   width: 100%;
   height: 100%;
   border-radius: 30px;
-  background-color: blueviolet;
+  background: rgb(239, 213, 174);
+  background: -moz-linear-gradient(0deg, rgba(239, 213, 174, 0.8240546218487395) 12%, rgba(255, 247, 235, 0.7204131652661064) 60%);
+  background: -webkit-linear-gradient(0deg, rgba(239, 213, 174, 0.8240546218487395) 12%, rgba(255, 247, 235, 0.7204131652661064) 60%);
+  background: linear-gradient(0deg, rgba(239, 213, 174, 0.8240546218487395) 12%, rgba(255, 247, 235, 0.7204131652661064) 60%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#efd5ae",endColorstr="#fff7eb",GradientType=1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -950,12 +963,16 @@ a {
 .form-intro {
   display: flex;
   flex-direction: column;
+  gap: 2rem;
+}
+.form-introduction {
+  display: grid;
   gap: 1rem;
 }
-.form-intro h1 {
+.form-introduction h1 {
   color: var(--bg-dark);
 }
-.form-intro p {
+.form-introduction p {
   color: var(--bg-dark);
   width: 330px;
 }
@@ -1185,6 +1202,7 @@ a {
     display: flex;
     justify-content: center;
     flex-direction: column;
+    padding: 0 2rem 0 1rem;
   }
   .container-nav-list-menu {
     display: flex;
@@ -1259,11 +1277,6 @@ a {
     width: 15px;
     height: 15px;
   }
-  .nav-buutton-login {
-    position: absolute;
-    top: -110px;
-    right: 50px;
-  }
   .nav-icon-book-index {
     position: absolute;
     right: 30px;
@@ -1297,8 +1310,7 @@ a {
   .nav-icon-shopping {
     position: absolute;
     top: -35px;
-    right: -10px;
-    gap: 0.5rem;
+    right: -15px;
     display: none;
     width: 130px;
     height: 30px;
@@ -1314,12 +1326,14 @@ a {
     border-radius: 10px;
     transition: 0.3s ease-in;
   }
-  .nav-shopping-wrapper:hover {
-    background-color: rgba(94, 94, 94, 0.155);
+  .nav-icon-bell {
+    cursor: pointer;
+    width: 18px;
+    color: var(--bg-dark);
   }
   .nav-icon-shopping-card {
     cursor: pointer;
-    font-size: 28px;
+    width: 18px;
     color: var(--bg-dark);
   }
   .nav-bell-wrapper {
@@ -1331,9 +1345,6 @@ a {
     border-radius: 10px;
     transition: 0.3s ease-in;
   }
-  .nav-bell-wrapper:hover {
-    background-color: rgba(94, 94, 94, 0.155);
-  }
   .button-login {
     background-color: var(--bg-smoot-p);
     width: 75px;
@@ -1342,9 +1353,6 @@ a {
     border-radius: 10px;
     transition: 0.3s ease-in;
     cursor: pointer;
-  }
-  .button-login:hover {
-    background-color: rgba(111, 111, 111, 0.229);
   }
   .button-login a {
     color: var(--bg-dark);
@@ -1374,7 +1382,6 @@ a {
     display: flex;
     align-items: center;
     height: 480px;
-
     padding: 2rem 1rem 2rem 1rem;
   }
   .wrapper-con-c-hero {
