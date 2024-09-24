@@ -1,7 +1,6 @@
 // Definisikan configurasi Database
 const config = require("../../database/models/user");
 const bycpt = require("bcrypt");
-const response = require("../../utils/responses");
 require("dotenv").config();
 // Gunakan library mysql
 
@@ -16,13 +15,14 @@ const formRegister = (req, res) => {
 const saveRegister = async (req, res) => {
   const salt = await bycpt.genSalt(10);
   const UserRegist = { username: req.body.username, email: req.body.email, password: await bycpt.hash(req.body.password, salt) };
-  if (UserRegist) {
-    const CreateUSer = await config.create(UserRegist, function (error, results) {
-      if (error) console.log("error");
-      response(res, 201, { CreateUSer: CreateUSer });
-      return res.redirect("/login");
-    });
+  const CreateUSer = await config.create(UserRegist);
+  if (CreateUSer) {
+    req.flash("status", "Yes..");
+    req.flash("message", "Registrasi berhasil");
+    res.redirect("/login");
+    console.log("berhasil");
   } else {
+    console.log("Error");
     res.redirect("/login");
     res.end();
   }

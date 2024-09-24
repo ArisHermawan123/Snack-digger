@@ -4,29 +4,24 @@ const jwt = require("jsonwebtoken");
 const response = require("../../utils/responses");
 require("dotenv").config();
 
-// Render tampilan untuk login yang ada didalam folder 'src/views/login.ejs'
 const login = (req, res) => {
   res.render("auth/login", {
     url: `${process.env.BASE_URL}\n/`,
-    // Kirim juga library flash yang telah di set
+    colorFlash: req.flash("color"),
+    statusFlash: req.flash("status"),
+    pesanFlash: req.flash("message"),
   });
 };
-// Post / kirim data yang diinput user
-const loginAuth = async (req, res, err) => {
+const loginAuth = async (req, res) => {
   const user = await config.findOne({ where: { email: req.body.email } });
   if (user) {
-    if (err) throw err;
     const ValidPass = await bycpt.compare(req.body.password, user.password);
     if (ValidPass.length > 0) {
-      const TokenJwt = jwt.sign({ id: user.id, email: user.email }, process.env.JSONTOKEN);
+      const TokenJwt = jwt.sign({ id: user.id, email: user.email, username: user.username }, process.env.JSONTOKEN);
       response(res, 201, { TokenJwt: TokenJwt });
-      req.session.loggedin = true;
       res.redirect("/home");
     } else {
       response(res, 400, console.log({ message: "Gagal login" }));
-      req.flash("color", "danger");
-      req.flash("status", "Oops..");
-      req.flash("message", "Akun tidak ditemukan");
       res.redirect("/login");
     }
   } else {
