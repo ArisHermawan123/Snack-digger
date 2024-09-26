@@ -9,7 +9,7 @@ const uploadRoutesRegist = require("../controllers/routes.login/register.routes"
 
 router.use("/image", uploadRoutesImage);
 router.use("/data", uploadRoutesApi);
-router.use("/home", uploadRoutesApp);
+router.use("/", uploadRoutesApp);
 router.use("/login", uploadRoutesLogin);
 router.use("/register", uploadRoutesRegist);
 
