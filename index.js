@@ -19,7 +19,19 @@ app.engine("ejs", ejsMate);
 app.set("views", __dirname + "/src/views");
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
-app.use(session({ secret: "keyboard cat", cookie: { maxAge: 60000 } }));
+app.use(
+  session({
+    resave: false,
+    saveUninitialized: false,
+    secret: "t@1k0ch3ng",
+    name: "secretName",
+    cookie: {
+      sameSite: true,
+      maxAge: 60000,
+    },
+  })
+);
+
 app.use("/public", express.static("public"));
 app.use(cors());
 app.use(flash());
