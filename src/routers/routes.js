@@ -12,9 +12,11 @@ const uploadRoutesProduct = require("../controllers/routes.product/product.route
 
 router.use("/image", uploadRoutesImage);
 router.use("/data", uploadRoutesApi);
+
 router.use("/", uploadRoutesApp);
 router.use("/login", uploadRoutesLogin);
 router.use("/register", uploadRoutesRegist);
-router.use("/product", uploadRoutesProduct);
+
+router.use("/", uploadRoutesProduct);
 
 module.exports = router;

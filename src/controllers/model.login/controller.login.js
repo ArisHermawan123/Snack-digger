@@ -17,9 +17,16 @@ const loginAuth = async (req, res) => {
   const user = await config.findOne({ where: { email: req.body.email } });
   if (user) {
     const ValidPass = await bycpt.compare(req.body.password, user.password);
+
     if (ValidPass) {
       const JwtToken = jwt.sign({ id: user.id, email: user.email, username: user.username }, process.env.JSONTOKEN, (error, results) => {
         if (error) console.log(error.message);
+
+        if (!req.body.email || !req.body.password) {
+          req.flash("status", "Isi");
+          req.flash("message", "Email dan password terlebih dahulu");
+        }
+
         if (results.length > 0) {
           req.session.loggedin = true;
           req.session.id = results[0].id;
