@@ -16,7 +16,7 @@
             </figure>
             <h1>
               Sna<span class="logo-title-c">c</span>k
-              <a href="<%= url %>" class="logo-title-digger"><span class="logo-title-d">D</span>igger</a>
+              <span class="logo-title-digger"><a href="<% = url %>profile" class="logo-title-d">D</a>igger</span>
             </h1>
           </div>
           <div class="wrapper-nav-list-menu">
@@ -60,11 +60,11 @@
           <div class="con-profile-wrapp">
             <div class="con-profile-name">
               <label for="name">Name:</label>
-              <input type="text" class="input-profile-name" />
+              <input type="text" value="<%= name %>" class="input-profile-name" disabled />
             </div>
             <div class="con-profile-email">
               <label for="name">Email:</label>
-              <input type="email" class="input-profile-email" />
+              <input type="email" value="<%= email %>" class="input-profile-email" disabled />
             </div>
           </div>
         </div>

@@ -1,6 +1,4 @@
 const IsNavigation = document.querySelector(".container-nav");
-const IsWrapperDropdownNav = document.querySelector(".nav-icon-shopping");
-const IsWrapperProfileNav = document.querySelector(".con-prof-username");
 
 const form = document.querySelector(".form");
 const emailInput = document.querySelector(".form-input-email");
@@ -9,21 +7,45 @@ const passInput = document.querySelector(".form-input-password");
 const btn = document.querySelector("span i");
 const passField = document.querySelector(".form-span-error-password");
 
-function HandleDropDown() {
-  if (IsWrapperDropdownNav.style.display === "flex") {
-    IsWrapperDropdownNav.style.display = "none";
-  } else {
-    IsWrapperDropdownNav.style.display = "flex";
-  }
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
 }
 
-function HnadleDropdownProfile() {
-  if (IsWrapperProfileNav.style.display === "block") {
-    IsWrapperProfileNav.style.display = "none";
-  } else {
-    IsWrapperProfileNav.style.display = "block";
+// Close the dropdown if the user clicks outside of it
+window.onclick = function (e) {
+  if (!e.target.matches(".dropbtn")) {
+    var myDropdown = document.getElementById("myDropdown");
+    if (myDropdown.classList.contains("show")) {
+      myDropdown.classList.remove("show");
+    }
   }
+};
+
+function HandleDropDown() {
+  document.querySelector(".nav-icon-shopping").classList.toggle("show-1");
 }
+
+window.onclick = function (e) {
+  if (!e.target.matches(".icon-book-open")) {
+    const IsWrapperDropdownNav = document.querySelector(".nav-icon-shopping");
+    if (IsWrapperDropdownNav.classList.contains("show-1")) {
+      IsWrapperDropdownNav.classList.remove("show-1");
+    }
+  }
+};
+
+function HnadleDropdownProfile() {
+  document.querySelector(".con-prof-username").classList.toggle("show-2");
+}
+
+window.onclick = function (e) {
+  if (!e.target.matches(".icon-book-open-1")) {
+    const IsWrapperProfileNav = document.querySelector(".con-prof-username");
+    if (IsWrapperProfileNav.classList.contains("show-2")) {
+      IsWrapperProfileNav.classList.remove("show-2");
+    }
+  }
+};
 
 window.onscroll = function () {
   if (window.scrollY > 22) {
