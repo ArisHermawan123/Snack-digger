@@ -2,11 +2,10 @@ const express = require("express");
 const cors = require("cors");
 const ejsMate = require("ejs-mate");
 const session = require("express-session");
-const flash = require("req-flash");
+const response = require("./src/utils/responses");
 
 const app = express();
-
-const response = require("./src/utils/responses");
+const flash = require("req-flash");
 const db = require("./src/database/config/db.config");
 const router = require("./src/routers/routes");
 
@@ -19,8 +18,6 @@ app.set("views", __dirname + "/src/views");
 app.set("view engine", "ejs");
 app.use("/public", express.static("public"));
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
-
 app.use(
   session({
     resave: false,
@@ -34,15 +31,15 @@ app.use(
   })
 );
 
+app.use(cors());
+
 app.use(flash());
 
-// tambahkan ini
 app.use(function (req, res, next) {
   res.setHeader("Cache-Control", "no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0");
   res.setHeader("Pragma", "no-cache");
   next();
 });
-// end
 
 app.use(router);
 

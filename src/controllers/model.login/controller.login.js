@@ -21,12 +21,6 @@ const loginAuth = async (req, res) => {
     if (ValidPass) {
       const JwtToken = jwt.sign({ id: user.id, email: user.email, username: user.username }, process.env.JSONTOKEN, (error, results) => {
         if (error) console.log(error.message);
-
-        if (!req.body.email || !req.body.password) {
-          req.flash("status", "Isi");
-          req.flash("message", "Email dan password terlebih dahulu");
-        }
-
         if (results.length > 0) {
           req.session.loggedin = true;
           req.session.id = results[0].id;

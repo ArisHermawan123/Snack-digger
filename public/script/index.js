@@ -59,6 +59,23 @@ const __isEmail = (email) => {
   const regexExp = /^[a-zA-Z0-9.!#$%&'+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)$/gi;
   return regexExp.test(email);
 };
+const __isPassword = (password) => {
+  const regexPass = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,16}$/;
+  return regexPass.test(password);
+};
+// const { username, email, password } = request.json();
+// const options = {
+//   method: "POST",
+//   body: JSON.stringify({
+//     username,
+//     email,
+//     password,
+//   }),
+//   headers: {
+//     "Content-Type": "application/json",
+//   },
+// };
+// const GetDataAuth = await fetch("http://localhost:3200/login", options).then((res) => res.json());
 
 const ChekEmailInput = () => {
   if (emailInput.value == "") {
@@ -76,23 +93,6 @@ const ChekEmailInput = () => {
   }
 };
 
-const __isPassword = (password) => {
-  const regexPass = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,16}$/;
-  return regexPass.test(password);
-};
-
-btn.onclick = function () {
-  if (passInput.type === "password") {
-    passInput.type = "text";
-    btn.classList.add("hide-btn-password");
-  } else {
-    passInput.type = "password";
-    btn.classList.remove("hide-btn-password");
-  }
-
-  ChekPasswordInput();
-};
-
 const ChekPasswordInput = () => {
   if (passInput.value == "") {
     return passField.classList.add("Invalid-null");
@@ -107,6 +107,18 @@ const ChekPasswordInput = () => {
   } catch (error) {
     console.log(error);
   }
+};
+
+btn.onclick = function () {
+  if (passInput.type === "password") {
+    passInput.type = "text";
+    btn.classList.add("hide-btn-password");
+  } else {
+    passInput.type = "password";
+    btn.classList.remove("hide-btn-password");
+  }
+
+  ChekPasswordInput();
 };
 
 form.addEventListener("submit", (e) => {

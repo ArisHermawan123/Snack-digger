@@ -1,6 +1,6 @@
 const appRouter = require("express").Router();
-const ControllerHome = require("../model.login/index").home;
-const ControllerProfile = require("../model.login/index").profile;
+const ControllerHome = require("../../controllers/model.login/index").home;
+const ControllerProfile = require("../../controllers/model.login/index").profile;
 const VerifyUser = require("../../database/config/verify");
 
 appRouter.get("/home", VerifyUser.isLogin, ControllerHome.home);
