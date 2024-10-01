@@ -1424,9 +1424,10 @@ a {
     color: var(--bg-dark);
   }
   .con-prof-username {
-    padding: 1rem;
+    position: absolute;
+    padding: 0;
+    right: 45px;
     display: none;
-    line-height: 40px;
   }
   .show-2 {
     display: block;
@@ -1454,7 +1455,13 @@ a {
     cursor: pointer;
   }
   .icon-dropdown {
+  }
+  .dropbtn {
     display: none;
+  }
+  .dropdown-content {
+    display: block;
+    padding-top: 0;
   }
 
   /* Navigation Close */

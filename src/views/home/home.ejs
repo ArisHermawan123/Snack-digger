@@ -22,7 +22,7 @@
           <div class="wrapper-nav-list-menu">
             <div class="weapper-list-menu-book">
               <div class="nav-icon-menu-home">
-                <i data-feather="align-center" class="icon-book-open-1" onclick=" HnadleDropdownProfile()"></i>
+                <i data-feather="align-center" class="icon-book-open-1" onclick="HnadleDropdownProfile()"></i>
               </div>
               <div class="nav-icon-book-home">
                 <i data-feather="book-open" class="icon-book-open" onclick="HandleDropDown()"></i>
@@ -53,7 +53,7 @@
                     <button class="dropbtn" onclick="myFunction()">Dropdown</button>
                     <div class="dropdown-content" id="myDropdown">
                       <a class="username" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <%= userName %></a>
-                      <a class="logout" href="#">Log out</a>
+                      <a class="logout" href="<%= url %>login/logout">Log out</a>
                     </div>
                   </div>
                 </div>
