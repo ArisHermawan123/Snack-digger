@@ -1,5 +1,5 @@
 const config = require("../../database/models/user");
-const bycpt = require("bcrypt");
+const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 // const response = require("../../utils/responses");
 require("dotenv").config();
@@ -14,44 +14,49 @@ const login = (req, res) => {
 };
 
 const loginAuth = async (req, res) => {
-  const user = await config.findOne({ where: { email: req.body.email } });
-  if (user) {
-    const ValidPass = await bycpt.compare(req.body.password, user.password);
+  const { email, password } = req.body;
 
-    if (ValidPass) {
-      const JwtToken = jwt.sign({ id: user.id, email: user.email, username: user.username }, process.env.JSONTOKEN, (error, results) => {
-        if (error) console.log(error.message);
-        if (results.length > 0) {
-          req.session.loggedin = true;
-          req.session.id = results[0].id;
-          req.session.username = results[0].username;
-          res.redirect("/home");
-        } else {
-          req.flash("color", "danger");
-          req.flash("status", "Oops..");
-          req.flash("message", "Akun tidak ditemukan");
-        }
-      });
-      return JwtToken;
-    } else {
-      res.redirect("/login");
-      console.log("error login");
+  try {
+    const user = await config.findOne({
+      where: {
+        email: email,
+      },
+    });
+
+    if (!user) {
+      return res.status(404).send("User not found");
     }
-  } else {
-    console.log("error mas");
-    res.redirect("/login");
-    res.end();
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(401).send("Invalid password");
+    }
+
+    const token = jwt.sign({ userId: user.id, email: user.email, username: user.username }, process.env.JSONTOKEN, { expiresIn: "1h" }, (error, results) => {
+      if (error) console.log(error.message);
+      if (results.length > 0) {
+        req.session.loggedin = true;
+        req.session.id = results[0].id;
+        req.session.username = results[0].username;
+        res.redirect("/home");
+      } else {
+        req.flash("color", "danger");
+        req.flash("status", "Oops..");
+        req.flash("message", "Akun tidak ditemukan");
+      }
+    });
+    return token;
+  } catch (error) {
+    console.error("Error logging in:", error);
+    return res.status(500).send("Server error");
   }
 };
 
-// Fungsi untuk logout | Cara memanggilnya menggunakan url/rute 'http://localhost:5050/login/logout'
 const logout = (req, res) => {
-  // Hapus sesi user dari broser
   req.session.destroy((err) => {
     if (err) {
       return console.log(err);
     }
-    // Hapus cokie yang masih tertinggal
     res.clearCookie("secretname");
     res.redirect("/login");
   });

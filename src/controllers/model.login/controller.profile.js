@@ -1,24 +1,43 @@
 const config = require("../../database/models/user");
+// const response = require("../../utils/responses");
 require("dotenv").config();
 
-const HandleErrorProfile = (err) => {
-  console.log(err.message, err.code);
+const profile = async (req, res) => {
+  const id = req.session.id;
+  try {
+    const user = await config.findOne({ where: { id: id } }, (error, results) => {
+      if (error) throw error;
+      if (user) {
+        res.render("partials/profile", {
+          url: `${process.env.BASE_URL}\n/`,
+          userName: req.session.username,
+          nama: results[0]["username"],
+          email: results[0]["email"],
+        });
+        return user;
+      } else {
+        return res.status(400).send("User Notfound");
+      }
+    });
+  } catch (error) {
+    console.log("Error Fetching User: ", error);
+    return res.status(500).send("Server Error");
+  }
+  // const GetID = await config.findOne({ where: { id: id } });
+  // const parsedValue = parseInt(GetID, 10);
+  // if (parsedValue) {
+  //   if (parsedValue === null) {
+  //     return res.status(400).send("Invalid Interget value");
+  //   }
+  //   if (error) console.log(error.message);
+  //   res.render("partials/profile", {
+  //     url: `${process.env.BASE_URL}\n/`,
+  //     userName: req.session.username,
+  //     nama: results[0]["username"],
+  //     email: results[0]["email"],
+  //   });
+  // }
+  // return GetID;
 };
 
-const profile = (req, res) => {
-  const GetID = config.findOne({ where: { id: req.session.id } });
-  if (GetID) {
-    (error, results) => {
-      if (error) throw error;
-      res.render("partials/profile", {
-        url: `${process.env.BASE_URL}\n/`,
-        userName: req.session.username,
-        name: results[0]["username"],
-        email: results[0]["email"],
-      });
-    };
-  } else {
-    HandleErrorProfile(err);
-  }
-};
 module.exports = { profile };

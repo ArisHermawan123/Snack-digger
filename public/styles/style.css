@@ -261,6 +261,9 @@ a {
 .dropdown-content .logout:hover {
   background-color: rgba(111, 111, 111, 0.229);
 }
+.dropdown-username-logout .dropbtn:hover {
+  background-color: rgba(111, 111, 111, 0.229);
+}
 .button-login {
   background-color: var(--bg-smoot-p);
   width: 75px;
@@ -282,6 +285,7 @@ a {
 }
 .dropbtn {
   border: none;
+  background-color: white;
   cursor: pointer;
 }
 .dropdown .dropbtn {
@@ -289,12 +293,8 @@ a {
   outline: none;
   color: white;
   padding: 14px 16px;
-  background-color: inherit;
   font-family: inherit;
   margin: 0;
-}
-.dropdown:hover .dropbtn {
-  background-color: red;
 }
 .dropdown-content {
   display: none;
@@ -312,9 +312,6 @@ a {
   text-align: left;
 }
 
-.dropdown-content a:hover {
-  background-color: #ddd;
-}
 .show {
   display: block;
 }

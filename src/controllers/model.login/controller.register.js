@@ -1,5 +1,5 @@
 const config = require("../../database/models/user");
-const bycpt = require("bcrypt");
+const bcrypt = require("bcrypt");
 require("dotenv").config();
 
 const formRegister = (req, res) => {
@@ -9,19 +9,39 @@ const formRegister = (req, res) => {
 };
 
 const saveRegister = async (req, res) => {
-  const salt = await bycpt.genSalt(10);
-  const UserRegist = { username: req.body.username, email: req.body.email, password: await bycpt.hash(req.body.password, salt) };
-  const CreateUSer = await config.create(UserRegist);
+  const { username, email, password } = req.body;
+  try {
+    // Cek apakah username atau email sudah ada
+    const existingUser = await config.findOne({
+      where: {
+        username: username,
+        email: email,
+      },
+    });
 
-  if (CreateUSer) {
-    req.flash("status", "Yes..");
-    req.flash("message", "Registrasi berhasil");
-    res.redirect("/login");
-    console.log("berhasil");
-  } else {
-    console.log("Error");
-    res.redirect("/login");
-    res.end();
+    if (existingUser) {
+      return res.status(400).send({ message: "Username or email already exists" });
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+    const user = await config.create({ username, email, password: hashedPassword });
+
+    if (user) {
+      req.flash("status", "yess..");
+      req.flash("message", "Registrasi Berhasil");
+      res.redirect("/login");
+      console.log("Registrasi Berhasil");
+    } else {
+      res.redirect("/login");
+      res.end();
+      console.log("Registrasi Error");
+    }
+    res.status(201).json({ message: "User registered successfully", userId: user.id });
+    return;
+  } catch (error) {
+    console.error("Error registering user:", error);
+    return res.status(500).send("Server Error");
   }
 };
 
