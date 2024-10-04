@@ -24,12 +24,15 @@ const loginAuth = async (req, res) => {
     });
 
     if (!user) {
-      return res.status(404).send("User not found");
+      req.flash("color", "danger");
+      req.flash("status", "Oppss... ");
+      req.flash("message", "Email nya benerin dulu bg");
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(401).send("Invalid password");
+      console.log("Invalid Password");
+      res.redirect("/login");
     }
 
     const token = jwt.sign({ userId: user.id, email: user.email, username: user.username }, process.env.JSONTOKEN, { expiresIn: "1h" }, (error, results) => {
@@ -45,10 +48,12 @@ const loginAuth = async (req, res) => {
         req.flash("message", "Akun tidak ditemukan");
       }
     });
-    return token;
+    const AuthRess = token;
+    return AuthRess;
   } catch (error) {
     console.error("Error logging in:", error);
-    return res.status(500).send("Server error");
+    res.redirect("/login");
+    res.end();
   }
 };
 

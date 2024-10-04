@@ -28,6 +28,7 @@ const saveRegister = async (req, res) => {
     const user = await config.create({ username, email, password: hashedPassword });
 
     if (user) {
+      req.flash("color", "success");
       req.flash("status", "yess..");
       req.flash("message", "Registrasi Berhasil");
       res.redirect("/login");
@@ -41,7 +42,6 @@ const saveRegister = async (req, res) => {
     return;
   } catch (error) {
     console.error("Error registering user:", error);
-    return res.status(500).send("Server Error");
   }
 };
 
